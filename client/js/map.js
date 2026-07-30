@@ -1,200 +1,221 @@
-/* Interactive Realistic Odisha Map Module Script */
+/* Interactive Realistic Odisha Map Module Script - MapsOfIndia Style */
 
 const odishaDistrictDetails = {
   Sundargarh: {
     crops: ['Paddy', 'Maize', 'Mustard', 'Vegetables', 'Pulses'],
-    path: 'M 180,20 L 320,15 L 350,55 L 290,95 L 210,85 L 170,55 Z',
-    color: '#0d9488',
-    center: { x: 250, y: 50 },
+    path: 'M 180,35 L 320,30 L 350,70 L 290,110 L 210,100 L 170,70 Z',
+    color: '#dcfce7',
+    center: { x: 250, y: 65 },
     region: 'North'
   },
   Jharsuguda: {
     crops: ['Paddy', 'Maize', 'Vegetables', 'Groundnut'],
-    path: 'M 140,55 L 180,55 L 210,85 L 180,120 L 130,95 Z',
-    color: '#14b8a6',
-    center: { x: 170, y: 85 },
+    path: 'M 140,70 L 180,70 L 210,100 L 180,135 L 130,110 Z',
+    color: '#e0f2fe',
+    center: { x: 170, y: 100 },
     region: 'North-West'
+  },
+  Deogarh: {
+    crops: ['Paddy', 'Maize', 'Pulses', 'Oilseeds'],
+    path: 'M 210,100 L 290,110 L 270,145 L 210,135 Z',
+    color: '#f3e8ff',
+    center: { x: 245, y: 122 },
+    region: 'North-Central'
   },
   Mayurbhanj: {
     crops: ['Paddy', 'Maize', 'Mustard', 'Vegetables', 'Oilseeds'],
-    path: 'M 410,15 L 530,30 L 510,110 L 420,95 L 390,55 Z',
-    color: '#059669',
-    center: { x: 450, y: 60 },
+    path: 'M 410,30 L 530,45 L 510,125 L 420,110 L 390,70 Z',
+    color: '#fce7f3',
+    center: { x: 450, y: 75 },
     region: 'North-East'
   },
   Kendujhar: {
     crops: ['Paddy', 'Maize', 'Vegetables', 'Pulses'],
-    path: 'M 350,55 L 390,55 L 420,95 L 390,160 L 320,140 L 290,95 Z',
-    color: '#10b981',
-    center: { x: 360, y: 105 },
+    path: 'M 350,70 L 390,70 L 420,110 L 390,175 L 320,155 L 290,110 Z',
+    color: '#fef9c3',
+    center: { x: 360, y: 120 },
     region: 'North-Central'
   },
   Balasore: {
     crops: ['Paddy', 'Mustard', 'Vegetables', 'Groundnut', 'Betel Vine'],
-    path: 'M 510,110 L 580,130 L 550,200 L 470,170 L 420,95 Z',
-    color: '#0284c7',
-    center: { x: 510, y: 145 },
+    path: 'M 510,125 L 580,145 L 550,215 L 470,185 L 420,110 Z',
+    color: '#fef3c7',
+    center: { x: 510, y: 160 },
     region: 'Coastal North'
   },
   Bhadrak: {
     crops: ['Paddy', 'Vegetables', 'Mustard', 'Black Gram'],
-    path: 'M 470,170 L 550,200 L 520,250 L 450,220 Z',
-    color: '#0369a1',
-    center: { x: 500, y: 210 },
+    path: 'M 470,185 L 550,215 L 520,265 L 450,235 Z',
+    color: '#dcfce7',
+    center: { x: 500, y: 225 },
     region: 'Coastal'
   },
   Sambalpur: {
     crops: ['Paddy (Hirakud Command)', 'Sugarcane', 'Vegetables', 'Groundnut'],
-    path: 'M 180,120 L 290,95 L 320,140 L 260,180 L 190,160 Z',
-    color: '#16a34a',
-    center: { x: 240, y: 140 },
+    path: 'M 180,135 L 270,145 L 320,155 L 260,195 L 190,175 Z',
+    color: '#fef9c3',
+    center: { x: 240, y: 155 },
     region: 'West-Central'
   },
   Bargarh: {
     crops: ['Paddy (Rabi & Kharif)', 'Sugarcane', 'Groundnut', 'Pulses'],
-    path: 'M 90,110 L 180,120 L 190,160 L 140,210 L 80,170 Z',
-    color: '#15803d',
-    center: { x: 135, y: 155 },
+    path: 'M 90,125 L 180,135 L 190,175 L 140,225 L 80,185 Z',
+    color: '#dcfce7',
+    center: { x: 135, y: 170 },
     region: 'West'
   },
   Subarnapur: {
     crops: ['Paddy', 'Handloom Cotton', 'Vegetables', 'Pulses'],
-    path: 'M 190,160 L 260,180 L 250,230 L 180,210 Z',
-    color: '#22c55e',
-    center: { x: 220, y: 195 },
+    path: 'M 190,175 L 260,195 L 250,245 L 180,225 Z',
+    color: '#f3e8ff',
+    center: { x: 220, y: 210 },
     region: 'Central West'
+  },
+  Boudh: {
+    crops: ['Paddy', 'Pulses', 'Vegetables', 'Groundnut'],
+    path: 'M 250,245 L 320,235 L 300,275 L 230,265 Z',
+    color: '#e0e7ff',
+    center: { x: 275, y: 255 },
+    region: 'Central'
   },
   Bolangir: {
     crops: ['Cotton', 'Paddy', 'Maize', 'Groundnut', 'Sunhemp'],
-    path: 'M 140,210 L 180,210 L 220,270 L 130,285 L 90,230 Z',
-    color: '#4ade80',
-    center: { x: 150, y: 245 },
+    path: 'M 140,225 L 180,225 L 220,285 L 130,300 L 90,245 Z',
+    color: '#dcfce7',
+    center: { x: 150, y: 260 },
     region: 'West'
   },
   Nuapada: {
     crops: ['Paddy', 'Cotton', 'Maize', 'Pulses'],
-    path: 'M 50,210 L 90,230 L 130,285 L 60,300 Z',
-    color: '#86efac',
-    center: { x: 85, y: 255 },
+    path: 'M 50,225 L 90,245 L 130,300 L 60,315 Z',
+    color: '#fce7f3',
+    center: { x: 85, y: 270 },
     region: 'Far West'
   },
   Angul: {
     crops: ['Paddy', 'Maize', 'Vegetables', 'Mustard', 'Sesame'],
-    path: 'M 260,180 L 320,140 L 380,180 L 330,235 L 250,230 Z',
-    color: '#0d9488',
-    center: { x: 310, y: 185 },
+    path: 'M 260,195 L 320,155 L 380,195 L 330,250 L 250,245 Z',
+    color: '#fef9c3',
+    center: { x: 310, y: 200 },
     region: 'Central'
   },
   Dhenkanal: {
     crops: ['Paddy', 'Sugarcane', 'Vegetables', 'Mango', 'Cashew'],
-    path: 'M 380,180 L 450,220 L 410,260 L 330,235 Z',
-    color: '#0f766e',
-    center: { x: 390, y: 220 },
+    path: 'M 380,195 L 450,235 L 410,275 L 330,250 Z',
+    color: '#fce7f3',
+    center: { x: 390, y: 235 },
     region: 'Central'
   },
   Jajpur: {
     crops: ['Paddy', 'Vegetables', 'Groundnut', 'Jute'],
-    path: 'M 450,220 L 520,250 L 480,285 L 410,260 Z',
-    color: '#0ea5e9',
-    center: { x: 465, y: 255 },
+    path: 'M 450,235 L 520,265 L 480,300 L 410,275 Z',
+    color: '#f3e8ff',
+    center: { x: 465, y: 270 },
     region: 'Central East'
   },
   Kendrapara: {
     crops: ['Paddy', 'Jute', 'Vegetables', 'Mustard', 'Pulses'],
-    path: 'M 520,250 L 585,280 L 540,320 L 480,285 Z',
-    color: '#2563eb',
-    center: { x: 530, y: 285 },
+    path: 'M 520,265 L 585,295 L 540,335 L 480,300 Z',
+    color: '#e0f2fe',
+    center: { x: 530, y: 300 },
     region: 'Coastal Delta'
   },
   Cuttack: {
     crops: ['Kharif Paddy', 'Vegetables', 'Green Gram', 'Mustard'],
-    path: 'M 410,260 L 480,285 L 450,330 L 390,300 Z',
-    color: '#0d9488',
-    center: { x: 430, y: 290 },
+    path: 'M 410,275 L 480,300 L 450,345 L 390,315 Z',
+    color: '#dcfce7',
+    center: { x: 430, y: 305 },
     region: 'Central Delta'
   },
   Jagatsinghpur: {
     crops: ['Paddy', 'Vegetables', 'Betel Leaf', 'Mustard', 'Sugarcane'],
-    path: 'M 480,285 L 540,320 L 500,355 L 450,330 Z',
-    color: '#1d4ed8',
-    center: { x: 490, y: 320 },
+    path: 'M 480,300 L 540,335 L 500,370 L 450,345 Z',
+    color: '#e0f2fe',
+    center: { x: 490, y: 335 },
     region: 'Coastal'
   },
   Puri: {
     crops: ['Coastal Paddy', 'Vegetables', 'Coconut', 'Betel Leaf', 'Groundnut'],
-    path: 'M 450,330 L 500,355 L 440,410 L 390,370 Z',
-    color: '#3b82f6',
-    center: { x: 445, y: 365 },
+    path: 'M 450,345 L 500,370 L 440,425 L 390,385 Z',
+    color: '#fff7ed',
+    center: { x: 445, y: 380 },
     region: 'Coastal South'
   },
   Khordha: {
     crops: ['Paddy', 'Vegetables', 'Floriculture', 'Sugarcane'],
-    path: 'M 390,300 L 450,330 L 390,370 L 340,340 Z',
-    color: '#06b6d4',
-    center: { x: 390, y: 335 },
+    path: 'M 390,315 L 450,345 L 390,385 L 340,355 Z',
+    color: '#fef9c3',
+    center: { x: 390, y: 350 },
     region: 'Central Coastal'
   },
   Nayagarh: {
     crops: ['Green Gram', 'Sugarcane', 'Paddy', 'Vegetables'],
-    path: 'M 330,235 L 410,260 L 390,300 L 340,340 L 290,300 Z',
-    color: '#10b981',
-    center: { x: 350, y: 285 },
+    path: 'M 330,250 L 410,275 L 390,315 L 340,355 L 290,315 Z',
+    color: '#dcfce7',
+    center: { x: 350, y: 300 },
     region: 'Central South'
   },
   Kandhamal: {
     crops: ['Organic Turmeric', 'Maize', 'Millet (Ragi)', 'Paddy', 'Ginger'],
-    path: 'M 220,270 L 330,235 L 290,300 L 310,360 L 230,340 Z',
-    color: '#d97706',
-    center: { x: 275, y: 300 },
+    path: 'M 220,285 L 330,250 L 290,315 L 310,375 L 230,355 Z',
+    color: '#fff7ed',
+    center: { x: 275, y: 315 },
     region: 'Central Hills'
   },
   Kalahandi: {
     crops: ['Cotton', 'Maize', 'Paddy', 'Pulses', 'Oilseeds'],
-    path: 'M 130,285 L 220,270 L 230,340 L 160,370 L 100,320 Z',
-    color: '#f59e0b',
-    center: { x: 170, y: 320 },
+    path: 'M 130,300 L 220,285 L 230,355 L 160,385 L 100,335 Z',
+    color: '#fef9c3',
+    center: { x: 170, y: 335 },
     region: 'South-West'
   },
   Rayagada: {
     crops: ['Cotton', 'Millet', 'Maize', 'Paddy', 'Cashew'],
-    path: 'M 230,340 L 310,360 L 280,420 L 210,400 Z',
-    color: '#eab308',
-    center: { x: 255, y: 380 },
+    path: 'M 230,355 L 310,375 L 280,435 L 210,415 Z',
+    color: '#f3e8ff',
+    center: { x: 255, y: 395 },
+    region: 'South'
+  },
+  Gajapati: {
+    crops: ['Paddy', 'Maize', 'Cashew', 'Spices'],
+    path: 'M 310,375 L 360,400 L 320,445 L 280,435 Z',
+    color: '#fce7f3',
+    center: { x: 315, y: 415 },
     region: 'South'
   },
   Ganjam: {
     crops: ['Groundnut', 'Paddy', 'Maize', 'Cashew', 'Sugarcane'],
-    path: 'M 340,340 L 390,370 L 360,450 L 280,420 Z',
-    color: '#0284c7',
-    center: { x: 340, y: 395 },
+    path: 'M 340,355 L 390,385 L 360,465 L 310,375 Z',
+    color: '#dcfce7',
+    center: { x: 350, y: 410 },
     region: 'South Coast'
   },
   Nabarangpur: {
     crops: ['Maize (Hybrid)', 'Paddy', 'Sugarcane', 'Vegetables'],
-    path: 'M 100,320 L 160,370 L 120,430 L 60,380 Z',
-    color: '#fbbf24',
-    center: { x: 110, y: 375 },
+    path: 'M 100,335 L 160,385 L 120,445 L 60,395 Z',
+    color: '#fff7ed',
+    center: { x: 110, y: 390 },
     region: 'South-West'
   },
   Koraput: {
     crops: ['Highland Coffee', 'Millet (Ragi)', 'Paddy', 'Ginger', 'Pineapple'],
-    path: 'M 120,430 L 210,400 L 170,480 L 80,470 Z',
-    color: '#ca8a04',
-    center: { x: 145, y: 445 },
+    path: 'M 120,445 L 210,415 L 170,495 L 80,485 Z',
+    color: '#dcfce7',
+    center: { x: 145, y: 460 },
     region: 'Far South'
   },
   Malkangiri: {
     crops: ['Millet (Ragi)', 'Paddy', 'Maize', 'Sesame', 'Tapioca'],
-    path: 'M 80,470 L 170,480 L 120,530 L 40,510 Z',
-    color: '#a16207',
-    center: { x: 100, y: 495 },
+    path: 'M 80,485 L 170,495 L 120,545 L 40,525 Z',
+    color: '#fce7f3',
+    center: { x: 100, y: 510 },
     region: 'Southern Tip'
   }
 };
 
 let activeDistrictName = 'Cuttack';
 
-// Render Realistic SVG Polygon Map of Odisha
+// Render Realistic SVG Polygon Map of Odisha (MapsOfIndia Style)
 function renderOdishaSVGMap() {
   const mapSvg = document.getElementById('odishaInteractiveSvgMap');
   if (!mapSvg) return;
@@ -208,44 +229,66 @@ function renderOdishaSVGMap() {
     polygonsHTML += `
       <g class="district-polygon-group ${isActive ? 'active' : ''}" onclick="selectDistrictOnMap('${dist}')" cursor="pointer">
         <path d="${data.path}" 
-              fill="${isActive ? '#f59e0b' : data.color}" 
-              fill-opacity="${isActive ? '0.95' : '0.75'}" 
-              stroke="#ffffff" 
-              stroke-width="${isActive ? '2.5' : '1.2'}" 
+              fill="${isActive ? '#fbbf24' : data.color}" 
+              stroke="#475569" 
+              stroke-width="${isActive ? '2.5' : '1'}" 
               class="district-path"/>
-        <circle cx="${data.center.x}" cy="${data.center.y}" r="${isActive ? '5' : '3'}" fill="#ffffff" class="district-pin-dot"/>
-        <text x="${data.center.x}" y="${data.center.y + 11}" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff" class="district-svg-text">${dist}</text>
+        <circle cx="${data.center.x}" cy="${data.center.y}" r="${isActive ? '4' : '2.5'}" fill="${isActive ? '#dc2626' : '#1e293b'}" class="district-pin-dot"/>
+        <text x="${data.center.x}" y="${data.center.y - 5}" text-anchor="middle" font-size="8.5" font-weight="700" fill="#0f172a" class="district-svg-text">${dist.toUpperCase()}</text>
       </g>
     `;
   });
 
   mapSvg.innerHTML = `
-    <!-- Bay of Bengal Ocean background graphic -->
-    <rect width="640" height="550" rx="16" fill="#0f172a" />
-    <path d="M 440,410 Q 520,350 585,280 Q 620,200 640,150 L 640,550 L 360,550 Z" fill="#0284c7" opacity="0.35"/>
-    <text x="560" y="440" font-size="12" font-weight="bold" fill="#38bdf8" opacity="0.8" transform="rotate(-35 560 440)">Bay of Bengal</text>
+    <!-- Background Canvas: Land & Bay of Bengal Ocean -->
+    <rect width="640" height="560" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
     
-    <!-- State boundary glow backdrop -->
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="3" result="blur" />
-      <feComposite in="SourceGraphic" in2="blur" operator="over" />
-    </filter>
+    <!-- Ocean (Bay of Bengal) -->
+    <path d="M 440,425 Q 520,370 585,295 Q 620,215 640,165 L 640,560 L 360,560 Z" fill="#7dd3fc" opacity="0.95"/>
+    <text x="540" y="470" font-size="13" font-weight="800" fill="#0369a1" letter-spacing="2" transform="rotate(-30 540 470)">BAY OF BENGAL</text>
+    
+    <!-- Neighboring State Labels -->
+    <text x="360" y="22" font-size="10" font-weight="800" fill="#64748b" letter-spacing="1.5">JHARKHAND</text>
+    <text x="540" y="28" font-size="9" font-weight="800" fill="#64748b" letter-spacing="1">WEST BENGAL</text>
+    <text x="12" y="270" font-size="10" font-weight="800" fill="#64748b" letter-spacing="1.5" transform="rotate(-90 12 270)">CHHATTISGARH</text>
+    <text x="210" y="450" font-size="9" font-weight="800" fill="#64748b" letter-spacing="1">ANDHRA PRADESH</text>
 
-    <!-- Map Title & Compass -->
-    <g transform="translate(20, 30)">
-      <rect width="140" height="35" rx="8" fill="rgba(15, 23, 42, 0.8)" stroke="rgba(255,255,255,0.2)"/>
-      <text x="12" y="22" font-size="11" font-weight="bold" fill="#10b981">🗺️ Odisha State Map</text>
+    <!-- Top-Left Title Header Box -->
+    <g transform="translate(15, 15)">
+      <rect width="130" height="34" rx="4" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+      <rect width="130" height="14" fill="#be185d" rx="2"/>
+      <text x="65" y="10" text-anchor="middle" font-size="9" font-weight="800" fill="#ffffff" letter-spacing="1">ODISHA</text>
+      <text x="65" y="27" text-anchor="middle" font-size="8" font-weight="700" fill="#334155">DISTRICT MAP</text>
     </g>
 
-    <!-- Compass -->
-    <g transform="translate(580, 40)">
-      <circle cx="0" cy="0" r="16" fill="rgba(15, 23, 42, 0.8)" stroke="#38bdf8"/>
-      <text x="0" y="-4" text-anchor="middle" font-size="10" font-weight="bold" fill="#ef4444">N</text>
-      <text x="0" y="10" text-anchor="middle" font-size="8" fill="#94a3b8">S</text>
+    <!-- State Capital Marker (Bhubaneswar) -->
+    <g transform="translate(415, 335)">
+      <circle cx="0" cy="0" r="5" fill="#ef4444" stroke="#ffffff" stroke-width="1.5"/>
+      <circle cx="0" cy="0" r="2" fill="#ffffff"/>
+      <text x="8" y="3" font-size="9" font-weight="900" fill="#0f172a">Bhubaneswar ★</text>
+    </g>
+
+    <!-- Compass Rose (Top Right) -->
+    <g transform="translate(605, 30)">
+      <circle cx="0" cy="0" r="14" fill="#ffffff" stroke="#94a3b8" stroke-width="1"/>
+      <path d="M 0,-10 L 3,0 L 0,3 L -3,0 Z" fill="#dc2626"/>
+      <text x="0" y="-12" text-anchor="middle" font-size="8" font-weight="800" fill="#dc2626">N</text>
     </g>
 
     <!-- District Polygons -->
     ${polygonsHTML}
+
+    <!-- Bottom-Right Legend Box -->
+    <g transform="translate(480, 485)">
+      <rect width="145" height="60" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+      <text x="72" y="12" text-anchor="middle" font-size="8" font-weight="800" fill="#be185d" letter-spacing="1">LEGEND</text>
+      <line x1="10" y1="22" x2="35" y2="22" stroke="#dc2626" stroke-width="2" stroke-dasharray="3 1"/>
+      <text x="42" y="25" font-size="7.5" fill="#334155" font-weight="600">State Boundary</text>
+      <circle cx="22" cy="36" r="3" fill="#ef4444" stroke="#ffffff"/>
+      <text x="42" y="39" font-size="7.5" fill="#334155" font-weight="600">State Capital</text>
+      <circle cx="22" cy="49" r="2" fill="#1e293b"/>
+      <text x="42" y="52" font-size="7.5" fill="#334155" font-weight="600">District Headquarter</text>
+    </g>
   `;
 }
 
