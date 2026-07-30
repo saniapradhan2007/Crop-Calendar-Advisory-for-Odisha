@@ -3,41 +3,40 @@
    ========================================================================== */
 
 :root {
-  --primary: #0d9488;
-  --primary-dark: #0f766e;
-  --primary-light: #ccfbf1;
-  --secondary: #16a34a;
+  --primary: #15803d;
+  --primary-dark: #166534;
+  --primary-light: rgba(34, 197, 94, 0.15);
+  --secondary: #22c55e;
   --secondary-dark: #15803d;
   --accent: #d97706;
   --accent-light: #fef3c7;
   
-  --bg-gradient: linear-gradient(135deg, #f0fdf4 0%, #e6fffa 50%, #f0f9ff 100%);
-  --card-bg: rgba(255, 255, 255, 0.85);
-  --card-border: rgba(255, 255, 255, 0.6);
-  --text-main: #1e293b;
-  --text-muted: #64748b;
-  --navbar-bg: rgba(255, 255, 255, 0.92);
-  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 10px 25px -5px rgba(13, 148, 136, 0.12);
-  --shadow-lg: 0 20px 35px -10px rgba(0, 0, 0, 0.15);
-  --glass-backdrop: blur(12px);
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --bg-gradient: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 40%, #e0f2fe 100%);
+  --card-bg: rgba(255, 255, 255, 0.82);
+  --card-border: rgba(255, 255, 255, 0.7);
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --navbar-bg: linear-gradient(135deg, #1b5e20 0%, #2e7d32 50%, #155724 100%);
+  --shadow-sm: 0 4px 6px -1px rgba(22, 101, 52, 0.05);
+  --shadow-md: 0 10px 30px -5px rgba(22, 101, 52, 0.12);
+  --shadow-lg: 0 20px 40px -10px rgba(22, 101, 52, 0.18);
+  --glass-backdrop: blur(18px);
+  --radius-sm: 10px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Dark Mode Overrides */
 [data-theme="dark"] {
   --bg-gradient: linear-gradient(135deg, #0f172a 0%, #064e3b 50%, #022c22 100%);
   --card-bg: rgba(15, 23, 42, 0.82);
-  --card-border: rgba(255, 255, 255, 0.1);
+  --card-border: rgba(255, 255, 255, 0.12);
   --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --navbar-bg: rgba(15, 23, 42, 0.94);
-  --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-  --primary-light: rgba(13, 148, 136, 0.25);
-  --accent-light: rgba(217, 119, 6, 0.25);
+  --text-muted: #cbd5e1;
+  --shadow-md: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
+  --primary-light: rgba(34, 197, 94, 0.25);
 }
 
 body {
@@ -53,8 +52,8 @@ body {
 /* Navigation Bar - Modern Agriculture Forest Dark Green & Glass Gradient */
 .navbar-custom {
   background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 50%, #155724 100%) !important;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 4px 20px rgba(27, 94, 32, 0.25);
   padding: 0.85rem 1.5rem;
@@ -145,43 +144,73 @@ body {
   border-color: #ffffff !important;
 }
 
-/* Glassmorphic Cards */
+/* Premium Glassmorphic Cards Engine */
 .glass-card {
-  background: var(--card-bg);
-  backdrop-filter: var(--glass-backdrop);
-  -webkit-backdrop-filter: var(--glass-backdrop);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
-  transition: var(--transition);
+  background: var(--card-bg) !important;
+  backdrop-filter: var(--glass-backdrop) !important;
+  -webkit-backdrop-filter: var(--glass-backdrop) !important;
+  border: 1px solid var(--card-border) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-md) !important;
+  transition: var(--transition) !important;
   overflow: hidden;
 }
 
 .glass-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-5px) scale(1.008) !important;
+  box-shadow: var(--shadow-lg) !important;
+  border-color: rgba(34, 197, 94, 0.45) !important;
 }
 
-/* Hero Section with Full-Width Agriculture Background & Green Gradient Overlay */
+/* Hero Section with High-Definition Clear Video Background & Soft Overlay */
 .hero-section {
-  padding: 6rem 1.5rem 5rem;
+  padding: 6.5rem 1.5rem 5.5rem;
   text-align: center;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, rgba(20, 83, 45, 0.86) 0%, rgba(22, 101, 52, 0.78) 50%, rgba(6, 78, 59, 0.88) 100%), url('/hero_bg.png') center/cover no-repeat;
   color: #ffffff;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
-.hero-section::before {
-  content: '';
+.hero-video-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  filter: brightness(1.12) contrast(1.08) saturate(1.15);
+}
+
+.hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at center, rgba(74, 222, 128, 0.15) 0%, transparent 70%);
-  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(20, 83, 45, 0.28) 0%, rgba(22, 101, 52, 0.22) 50%, rgba(6, 78, 59, 0.30) 100%);
+  z-index: 1;
+}
+
+.hero-text-card {
+  background: rgba(15, 23, 42, 0.40);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+.hero-section .container {
+  position: relative;
+  z-index: 2;
 }
 
 .hero-title {

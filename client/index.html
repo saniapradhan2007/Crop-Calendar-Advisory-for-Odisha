@@ -50,28 +50,35 @@
     </div>
   </nav>
 
-  <!-- Full-Width Agriculture Hero Banner with Green Gradient Overlay -->
+  <!-- Full-Width Agriculture Hero Banner with Video Background & Green Gradient Overlay -->
   <section class="hero-section">
-    <div class="container py-4">
-      <div class="badge bg-warning text-dark border border-warning rounded-pill px-4 py-2 mb-4 fw-bold shadow-sm">
-        <i class="fas fa-award me-2 text-dark"></i><span data-i18n="officialBadge">Official Agriculture Advisory Portal of Odisha</span>
-      </div>
-      <h1 class="hero-title" data-i18n="heroHeading">Smart Agriculture for Every Odisha Farmer</h1>
-      <p class="hero-subtitle" data-i18n="heroSubheading">District-wise crop scheduling, weather alerts, fertilizer calculators, pest diagnostics & AI farming assistance across all 30 districts of Odisha.</p>
-      
-      <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
-        <a href="/live-map.html" class="btn btn-danger btn-lg rounded-pill fw-bold hero-btn-animated px-4 py-3">
-          <i class="fas fa-location-crosshairs me-2"></i>Live Location Map
-        </a>
-        <a href="/crop-calendar.html" class="btn btn-success btn-lg rounded-pill fw-bold hero-btn-animated px-4 py-3">
-          <i class="fas fa-calendar-alt me-2"></i><span data-i18n="btnExploreCalendar">Explore Crop Calendar</span>
-        </a>
-        <a href="/advisory.html" class="btn btn-warning text-dark btn-lg rounded-pill fw-bold hero-btn-animated px-4 py-3">
-          <i class="fas fa-microscope me-2"></i><span data-i18n="btnAiScanner">AI Disease Scanner</span>
-        </a>
-        <a href="/chatbot.html" class="btn btn-light text-dark btn-lg rounded-pill fw-bold hero-btn-animated px-4 py-3">
-          <i class="fas fa-robot me-2 text-success"></i><span data-i18n="btnAskAi">Ask AI Assistant</span>
-        </a>
+    <video autoplay muted loop playsinline id="heroVideoBg" class="hero-video-bg">
+      <source src="/videos/208669.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+
+    <div class="container py-2">
+      <div class="hero-text-card">
+        <div class="badge bg-warning text-dark border border-warning rounded-pill px-4 py-2 mb-4 fw-bold shadow-sm">
+          <i class="fas fa-award me-2 text-dark"></i><span data-i18n="officialBadge">Official Agriculture Advisory Portal of Odisha</span>
+        </div>
+        <h1 class="hero-title" data-i18n="heroHeading">Smart Agriculture for Every Odisha Farmer</h1>
+        <p class="hero-subtitle" data-i18n="heroSubheading">District-wise crop scheduling, weather alerts, fertilizer calculators, pest diagnostics & AI farming assistance across all 30 districts of Odisha.</p>
+        
+        <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+          <a href="/live-map.html" class="btn btn-danger btn-lg rounded-pill fw-bold hero-btn-animated px-4 py-3">
+            <i class="fas fa-location-crosshairs me-2"></i>Live Location Map
+          </a>
+          <a href="/crop-calendar.html" class="btn btn-success btn-lg rounded-pill fw-bold hero-btn-animated px-4 py-3">
+            <i class="fas fa-calendar-alt me-2"></i><span data-i18n="btnExploreCalendar">Explore Crop Calendar</span>
+          </a>
+          <a href="/advisory.html" class="btn btn-warning text-dark btn-lg rounded-pill fw-bold hero-btn-animated px-4 py-3">
+            <i class="fas fa-microscope me-2"></i><span data-i18n="btnAiScanner">AI Disease Scanner</span>
+          </a>
+          <a href="/chatbot.html" class="btn btn-light text-dark btn-lg rounded-pill fw-bold hero-btn-animated px-4 py-3">
+            <i class="fas fa-robot me-2 text-success"></i><span data-i18n="btnAskAi">Ask AI Assistant</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
