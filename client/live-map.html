@@ -28,16 +28,16 @@
     .gps-pulse-marker {
       width: 22px;
       height: 22px;
-      background: #2563eb;
+      background: #ef4444;
       border: 3px solid #ffffff;
       border-radius: 50%;
-      box-shadow: 0 0 0 rgba(37, 99, 235, 0.6);
+      box-shadow: 0 0 0 rgba(239, 68, 68, 0.6);
       animation: pulse-ring 1.8s infinite;
     }
     @keyframes pulse-ring {
-      0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7); }
-      70% { box-shadow: 0 0 0 18px rgba(37, 99, 235, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+      0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+      70% { box-shadow: 0 0 0 18px rgba(239, 68, 68, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
     }
   </style>
 </head>
@@ -76,25 +76,63 @@
     </div>
   </nav>
 
-  <!-- Live Location Banner & Controls -->
+  <!-- Live Location Banner & District Selector Controls -->
   <section class="py-4 bg-primary bg-opacity-10 border-bottom">
     <div class="container">
       <div class="row align-items-center g-3">
-        <div class="col-md-8">
+        <div class="col-lg-6">
           <div class="d-flex align-items-center gap-3">
             <div class="p-3 bg-danger bg-opacity-10 text-danger rounded-circle">
               <i class="fas fa-location-crosshairs fa-2x"></i>
             </div>
             <div>
               <h2 class="fw-bold text-dark mb-1">📍 Live GPS Location & Farm Advisory</h2>
-              <p class="text-muted mb-0">Detect your exact GPS location on the live map to get automated crop calendar, weather, irrigation & disease alerts.</p>
+              <p class="text-muted mb-0">Detect live GPS or select any of the 30 Odisha districts to get crop calendars, weather & advice.</p>
             </div>
           </div>
         </div>
-        <div class="col-md-4 text-md-end">
-          <button id="triggerGpsBtn" onclick="detectLiveGpsLocation()" class="btn btn-danger btn-lg rounded-pill fw-bold shadow">
-            <i class="fas fa-crosshairs me-2"></i>Allow & Detect My Location
-          </button>
+
+        <!-- GPS Button & All 30 Districts Dropdown Selector -->
+        <div class="col-lg-6">
+          <div class="d-flex flex-wrap gap-2 justify-content-lg-end align-items-center">
+            <select id="liveDistrictDropdown" onchange="onDistrictDropdownChange(this.value)" class="form-select form-select-lg rounded-pill fw-bold shadow-sm" style="max-width: 250px;">
+              <option value="" disabled selected>Select District (30 Options)</option>
+              <option value="Angul">Angul</option>
+              <option value="Balasore">Balasore</option>
+              <option value="Bargarh">Bargarh</option>
+              <option value="Bhadrak">Bhadrak</option>
+              <option value="Bolangir">Bolangir</option>
+              <option value="Boudh">Boudh</option>
+              <option value="Cuttack">Cuttack</option>
+              <option value="Deogarh">Deogarh</option>
+              <option value="Dhenkanal">Dhenkanal</option>
+              <option value="Gajapati">Gajapati</option>
+              <option value="Ganjam">Ganjam</option>
+              <option value="Jagatsinghpur">Jagatsinghpur</option>
+              <option value="Jajpur">Jajpur</option>
+              <option value="Jharsuguda">Jharsuguda</option>
+              <option value="Kalahandi">Kalahandi</option>
+              <option value="Kandhamal">Kandhamal</option>
+              <option value="Kendrapara">Kendrapara</option>
+              <option value="Kendujhar">Kendujhar</option>
+              <option value="Khordha">Khordha (Bhubaneswar)</option>
+              <option value="Koraput">Koraput</option>
+              <option value="Malkangiri">Malkangiri</option>
+              <option value="Mayurbhanj">Mayurbhanj</option>
+              <option value="Nabarangpur">Nabarangpur</option>
+              <option value="Nayagarh">Nayagarh</option>
+              <option value="Nuapada">Nuapada</option>
+              <option value="Puri">Puri</option>
+              <option value="Rayagada">Rayagada</option>
+              <option value="Sambalpur">Sambalpur</option>
+              <option value="Subarnapur">Subarnapur</option>
+              <option value="Sundargarh">Sundargarh</option>
+            </select>
+
+            <button id="triggerGpsBtn" onclick="detectLiveGpsLocation()" class="btn btn-danger btn-lg rounded-pill fw-bold shadow">
+              <i class="fas fa-crosshairs me-1"></i>Auto GPS Detect
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -103,17 +141,17 @@
   <!-- Main Live Map & 5-Point Advisory Grid -->
   <section class="py-5">
     <div class="container">
-      <div class="row g-4">
+      <div class="row g-4 mb-4">
         <!-- Interactive Leaflet GIS Map -->
         <div class="col-lg-7">
           <div class="glass-card p-3 h-100">
             <div class="d-flex justify-content-between align-items-center mb-3">
               <h5 class="fw-bold text-dark mb-0"><i class="fas fa-map-marked-alt text-primary me-2"></i>Live Satellite & GIS Map</h5>
-              <span id="gpsStatusBadge" class="badge bg-secondary rounded-pill px-3 py-2">Click button to locate</span>
+              <span id="gpsStatusBadge" class="badge bg-secondary rounded-pill px-3 py-2">Select District or Detect GPS</span>
             </div>
             <div id="liveGisMap"></div>
             <div class="mt-3 text-muted small d-flex justify-content-between">
-              <span><i class="fas fa-info-circle text-primary me-1"></i>Pulsing pin indicates your detected live GPS location.</span>
+              <span><i class="fas fa-info-circle text-primary me-1"></i>Pulsing pin shows current location/district on satellite map.</span>
               <span id="latLngDisplay">Lat: -- | Lng: --</span>
             </div>
           </div>
@@ -121,16 +159,47 @@
 
         <!-- 5-Point Automated Advisory Panel -->
         <div class="col-lg-5">
-          <div id="liveAdvisoryPanel" class="h-100">
-            <div class="glass-card p-4 h-100 text-center d-flex flex-column justify-content-center align-items-center">
-              <i class="fas fa-location-dot fa-3x text-danger mb-3 opacity-50"></i>
-              <h4 class="fw-bold text-dark mb-2">Location Required</h4>
-              <p class="text-muted mb-4">Click <strong>"Allow & Detect My Location"</strong> to view real-time crop calendar, weather, irrigation advice & disease alerts for your district.</p>
-              <button onclick="detectLiveGpsLocation()" class="btn btn-primary-custom btn-lg rounded-pill">
-                <i class="fas fa-location-arrow me-2"></i>Detect Location Now
-              </button>
-            </div>
-          </div>
+          <div id="liveAdvisoryPanel" class="h-100"></div>
+        </div>
+      </div>
+
+      <!-- Quick 30 Districts Button Grid Selector -->
+      <div class="glass-card p-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="fw-bold text-dark mb-0"><i class="fas fa-th me-2 text-danger"></i>All 30 Odisha Districts Quick Select Options</h5>
+          <small class="text-muted">Click any district to view live map & advisory</small>
+        </div>
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-5 row-cols-lg-6 g-2 text-center" id="liveDistrictGrid">
+          <div class="col"><button onclick="selectLiveDistrict('Angul')" class="district-btn w-100">Angul</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Balasore')" class="district-btn w-100">Balasore</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Bargarh')" class="district-btn w-100">Bargarh</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Bhadrak')" class="district-btn w-100">Bhadrak</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Bolangir')" class="district-btn w-100">Bolangir</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Boudh')" class="district-btn w-100">Boudh</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Cuttack')" class="district-btn w-100">Cuttack</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Deogarh')" class="district-btn w-100">Deogarh</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Dhenkanal')" class="district-btn w-100">Dhenkanal</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Gajapati')" class="district-btn w-100">Gajapati</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Ganjam')" class="district-btn w-100">Ganjam</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Jagatsinghpur')" class="district-btn w-100">Jagatsinghpur</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Jajpur')" class="district-btn w-100">Jajpur</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Jharsuguda')" class="district-btn w-100">Jharsuguda</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Kalahandi')" class="district-btn w-100">Kalahandi</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Kandhamal')" class="district-btn w-100">Kandhamal</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Kendrapara')" class="district-btn w-100">Kendrapara</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Kendujhar')" class="district-btn w-100">Kendujhar</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Khordha')" class="district-btn w-100">Khordha</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Koraput')" class="district-btn w-100">Koraput</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Malkangiri')" class="district-btn w-100">Malkangiri</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Mayurbhanj')" class="district-btn w-100">Mayurbhanj</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Nabarangpur')" class="district-btn w-100">Nabarangpur</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Nayagarh')" class="district-btn w-100">Nayagarh</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Nuapada')" class="district-btn w-100">Nuapada</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Puri')" class="district-btn w-100">Puri</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Rayagada')" class="district-btn w-100">Rayagada</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Sambalpur')" class="district-btn w-100">Sambalpur</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Subarnapur')" class="district-btn w-100">Subarnapur</button></div>
+          <div class="col"><button onclick="selectLiveDistrict('Sundargarh')" class="district-btn w-100">Sundargarh</button></div>
         </div>
       </div>
     </div>
@@ -150,6 +219,6 @@
   
   <script src="/js/app.js"></script>
   <script src="/js/auth.js"></script>
-  <script src="/js/live-map.js"></script>
+  <script src="/js/live-map.js?v=20260730_v30"></script>
 </body>
 </html>

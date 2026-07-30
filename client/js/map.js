@@ -348,6 +348,6 @@ async function selectMasterDistrict(distName) {
 
 document.addEventListener('DOMContentLoaded', () => {
   renderMasterOdishaSVGMap();
-  const savedDist = localStorage.getItem('odisha_user_district') || 'Cuttack';
+  const savedDist = localStorage.getItem('odisha_user_district') || 'Khordha';
   selectMasterDistrict(savedDist);
 });
