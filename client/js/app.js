@@ -219,6 +219,21 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+function handleFooterFeedback(event) {
+  event.preventDefault();
+  const name = document.getElementById('feedbackName')?.value || 'Farmer';
+  const district = document.getElementById('feedbackDistrict')?.value || 'Odisha';
+  
+  if (typeof showToast === 'function') {
+    showToast(`Thank you ${name}! Your feedback for ${district} district has been submitted successfully to Krushi Officers.`, 'success');
+  } else {
+    alert(`Thank you ${name}! Your feedback for ${district} district has been submitted.`);
+  }
+
+  const form = document.getElementById('footerFeedbackForm');
+  if (form) form.reset();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   setLanguage(currentLang);

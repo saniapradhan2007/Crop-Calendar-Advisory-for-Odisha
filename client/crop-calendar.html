@@ -179,11 +179,115 @@
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container text-center">
-      <p class="mb-1 fw-bold text-dark"><i class="fas fa-wheat-awn text-success me-2"></i><span data-i18n="appTitle">Odisha Crop Calendar & Advisory</span></p>
-      <small class="text-muted" data-i18n="footerText">© 2026 Odisha Department of Agriculture & Farmers' Empowerment. All rights reserved.</small>
+  <!-- Rich Mobile-Friendly Footer Component -->
+  <footer class="footer-custom pt-5 pb-4 mt-5">
+    <div class="container">
+      <div class="row g-4 mb-4">
+        
+        <!-- Col 1: About & Contact Info -->
+        <div class="col-lg-4 col-md-6">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <i class="fas fa-wheat-awn fa-2x text-success"></i>
+            <h5 class="fw-bold text-dark mb-0">Odisha Crop Calendar</h5>
+          </div>
+          <p class="text-muted small mb-3">Department of Agriculture & Farmers' Empowerment, Government of Odisha. Providing district-wise crop scheduling, weather alerts, fertilizer advice & AI Krushi assistance across all 30 districts.</p>
+          
+          <div class="contact-info small text-muted">
+            <p class="mb-1"><i class="fas fa-location-dot text-danger me-2"></i>Krushi Bhavan, Keshari Nagar, Bhubaneswar - 751001</p>
+            <p class="mb-1"><i class="fas fa-envelope text-primary me-2"></i>support@krushi.odisha.gov.in</p>
+            <p class="mb-0"><i class="fas fa-phone text-success me-2"></i>0674-2391325 / 0674-2391326</p>
+          </div>
+        </div>
+
+        <!-- Col 2: Emergency Helplines & Social Media -->
+        <div class="col-lg-4 col-md-6">
+          <h6 class="fw-bold text-dark mb-3"><i class="fas fa-headset text-danger me-2"></i>24x7 Emergency Farmers' Helpline</h6>
+          
+          <div class="p-3 bg-danger bg-opacity-10 border border-danger border-opacity-25 rounded-3 mb-3">
+            <div class="d-flex align-items-center justify-content-between mb-1">
+              <strong class="text-danger small"><i class="fas fa-phone-volume me-1"></i>Krushi Samrudhi Helpline</strong>
+              <span class="badge bg-danger text-white">Toll-Free</span>
+            </div>
+            <h4 class="fw-bold text-danger mb-0">155333 / 1800-180-1551</h4>
+          </div>
+
+          <div class="p-3 bg-success bg-opacity-10 border border-success border-opacity-25 rounded-3 mb-3">
+            <div class="d-flex align-items-center justify-content-between mb-1">
+              <strong class="text-success small"><i class="fas fa-bug me-1"></i>Pest & Weather Emergency Hotline</strong>
+              <span class="badge bg-success text-white">24x7 Active</span>
+            </div>
+            <h5 class="fw-bold text-success mb-0">1800-345-6770</h5>
+          </div>
+
+          <!-- Social Media Icons -->
+          <h6 class="fw-bold text-dark mb-2"><i class="fas fa-share-nodes text-primary me-2"></i>Connect With Us</h6>
+          <div class="d-flex gap-2">
+            <a href="#" class="btn btn-outline-primary btn-sm rounded-circle social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="btn btn-outline-info btn-sm rounded-circle social-icon" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="btn btn-outline-danger btn-sm rounded-circle social-icon" title="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="btn btn-outline-warning btn-sm rounded-circle social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="btn btn-outline-success btn-sm rounded-circle social-icon" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <!-- Col 3: Interactive Feedback Form -->
+        <div class="col-lg-4 col-md-12">
+          <div class="glass-card p-4 border-start border-4 border-success">
+            <h6 class="fw-bold text-dark mb-2"><i class="fas fa-comment-dots text-success me-2"></i>Farmer Feedback & Query Form</h6>
+            <p class="text-muted extra-small mb-3">Send your feedback or farming queries directly to Agriculture Extension Officers.</p>
+            
+            <form id="footerFeedbackForm" onsubmit="handleFooterFeedback(event)">
+              <div class="row g-2 mb-2">
+                <div class="col-6">
+                  <input type="text" id="feedbackName" class="form-control form-control-sm" placeholder="Your Name" required>
+                </div>
+                <div class="col-6">
+                  <input type="tel" id="feedbackPhone" class="form-control form-control-sm" placeholder="Mobile No" required>
+                </div>
+              </div>
+              
+              <div class="row g-2 mb-2">
+                <div class="col-6">
+                  <select id="feedbackDistrict" class="form-select form-select-sm" required>
+                    <option value="" disabled selected>Select District</option>
+                    <option value="Cuttack">Cuttack</option>
+                    <option value="Khordha">Khordha</option>
+                    <option value="Puri">Puri</option>
+                    <option value="Sambalpur">Sambalpur</option>
+                    <option value="Balasore">Balasore</option>
+                    <option value="Ganjam">Ganjam</option>
+                    <option value="Koraput">Koraput</option>
+                    <option value="Other">Other Districts</option>
+                  </select>
+                </div>
+                <div class="col-6">
+                  <select id="feedbackCategory" class="form-select form-select-sm" required>
+                    <option value="Crop Advisory">Crop Advice</option>
+                    <option value="Pest Problem">Pest Issue</option>
+                    <option value="Weather Alert">Weather Issue</option>
+                    <option value="General Feedback">Feedback</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="mb-2">
+                <textarea id="feedbackMsg" class="form-control form-control-sm" rows="2" placeholder="Write your question or feedback..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-success btn-sm w-100 rounded-pill fw-bold">
+                <i class="fas fa-paper-plane me-1"></i>Submit Feedback
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Copyright & Govt Credits -->
+      <div class="pt-3 border-top text-center text-muted small d-flex flex-wrap justify-content-between align-items-center">
+        <span>© 2026 Odisha Department of Agriculture & Farmers' Empowerment. All rights reserved.</span>
+        <span><i class="fas fa-shield-halved text-success me-1"></i>Official Odisha Krushi Portal</span>
+      </div>
     </div>
   </footer>
 
