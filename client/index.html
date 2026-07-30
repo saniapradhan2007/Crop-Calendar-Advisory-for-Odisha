@@ -12,9 +12,9 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   
-  <!-- Leaflet GIS Real Map CSS & JS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Three.js WebGL 3D Engine & Orbit Controls -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/responsive.css">
@@ -76,23 +76,26 @@
     </div>
   </section>
 
-  <!-- Interactive Real GIS Odisha Map & District Selector -->
+  <!-- Interactive 3D WebGL Odisha Map & District Selector -->
   <section class="py-5">
     <div class="container">
       <div class="text-center mb-4">
-        <h3 class="fw-bold text-dark"><i class="fas fa-map-marked-alt text-success me-2"></i><span data-i18n="mapHeading">Interactive Odisha District Map & Crop Insights</span></h3>
-        <p class="text-muted" data-i18n="mapSubheading">Click any district on the real interactive map or grid below to view recommended crops, live weather & crop calendar</p>
+        <h3 class="fw-bold text-dark"><i class="fas fa-cube text-success me-2"></i><span data-i18n="mapHeading">Interactive 3D Odisha District Topographic Map & Crop Insights</span></h3>
+        <p class="text-muted" data-i18n="mapSubheading">Rotate 360°, tilt, or click any 3D glowing district pin to view recommended crops, live weather & crop calendar</p>
       </div>
 
-      <!-- Real Leaflet GIS Map & Smart Insights Card Grid -->
+      <!-- Real 3D WebGL Map & Smart Insights Card Grid -->
       <div class="row g-4 mb-4 align-items-stretch">
         <div class="col-lg-7">
           <div class="glass-card p-3 h-100 d-flex flex-column">
             <div class="d-flex justify-content-between align-items-center mb-2 px-1">
-              <small class="text-muted fw-bold"><i class="fas fa-satellite text-primary me-1"></i>Real GIS OpenStreetMap Engine</small>
-              <span class="badge bg-success"><i class="fas fa-check-circle me-1"></i>100% Accurate Coordinates</span>
+              <small class="text-muted fw-bold"><i class="fas fa-cube text-success me-1"></i>Realistic 3D WebGL Topographic Terrain Map</small>
+              <div class="d-flex gap-2">
+                <button id="toggle3DRotateBtn" onclick="toggle3DRotate()" class="btn btn-sm btn-success rounded-pill px-3"><i class="fas fa-pause me-1"></i>Pause 3D Rotate</button>
+                <button onclick="reset3DCamera()" class="btn btn-sm btn-outline-secondary rounded-pill px-2"><i class="fas fa-sync me-1"></i>Reset View</button>
+              </div>
             </div>
-            <div id="odishaLeafletRealMap" style="height: 480px; width: 100%; border-radius: 12px; z-index: 1;"></div>
+            <div id="odisha3DMapContainer" style="height: 480px; width: 100%; border-radius: 12px; overflow: hidden; background: #0f172a; cursor: grab;"></div>
           </div>
         </div>
 
@@ -105,39 +108,39 @@
       <div class="glass-card p-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h5 class="fw-bold text-dark mb-0"><i class="fas fa-th me-2 text-primary"></i><span data-i18n="quickSelectTitle">All 30 Districts of Odisha Quick Select</span></h5>
-          <small class="text-muted">Click district to focus real map & view insights</small>
+          <small class="text-muted">Click district to activate 3D focus & view insights</small>
         </div>
         <div class="row row-cols-2 row-cols-sm-3 row-cols-md-5 row-cols-lg-6 g-2 text-center" id="odishaDistrictGrid">
-          <div class="col"><button onclick="selectDistrictOnMap('Angul')" class="district-btn w-100">Angul</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Balasore')" class="district-btn w-100">Balasore</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Bargarh')" class="district-btn w-100">Bargarh</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Bhadrak')" class="district-btn w-100">Bhadrak</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Bolangir')" class="district-btn w-100">Bolangir</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Boudh')" class="district-btn w-100">Boudh</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Cuttack')" class="district-btn w-100 active">Cuttack</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Deogarh')" class="district-btn w-100">Deogarh</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Dhenkanal')" class="district-btn w-100">Dhenkanal</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Gajapati')" class="district-btn w-100">Gajapati</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Ganjam')" class="district-btn w-100">Ganjam</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Jagatsinghpur')" class="district-btn w-100">Jagatsinghpur</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Jajpur')" class="district-btn w-100">Jajpur</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Jharsuguda')" class="district-btn w-100">Jharsuguda</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Kalahandi')" class="district-btn w-100">Kalahandi</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Kandhamal')" class="district-btn w-100">Kandhamal</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Kendrapara')" class="district-btn w-100">Kendrapara</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Kendujhar')" class="district-btn w-100">Kendujhar</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Khordha')" class="district-btn w-100">Khordha</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Koraput')" class="district-btn w-100">Koraput</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Malkangiri')" class="district-btn w-100">Malkangiri</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Mayurbhanj')" class="district-btn w-100">Mayurbhanj</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Nabarangpur')" class="district-btn w-100">Nabarangpur</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Nayagarh')" class="district-btn w-100">Nayagarh</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Nuapada')" class="district-btn w-100">Nuapada</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Puri')" class="district-btn w-100">Puri</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Rayagada')" class="district-btn w-100">Rayagada</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Sambalpur')" class="district-btn w-100">Sambalpur</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Subarnapur')" class="district-btn w-100">Subarnapur</button></div>
-          <div class="col"><button onclick="selectDistrictOnMap('Sundargarh')" class="district-btn w-100">Sundargarh</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Angul')" class="district-btn w-100">Angul</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Balasore')" class="district-btn w-100">Balasore</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Bargarh')" class="district-btn w-100">Bargarh</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Bhadrak')" class="district-btn w-100">Bhadrak</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Bolangir')" class="district-btn w-100">Bolangir</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Boudh')" class="district-btn w-100">Boudh</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Cuttack')" class="district-btn w-100 active">Cuttack</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Deogarh')" class="district-btn w-100">Deogarh</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Dhenkanal')" class="district-btn w-100">Dhenkanal</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Gajapati')" class="district-btn w-100">Gajapati</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Ganjam')" class="district-btn w-100">Ganjam</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Jagatsinghpur')" class="district-btn w-100">Jagatsinghpur</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Jajpur')" class="district-btn w-100">Jajpur</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Jharsuguda')" class="district-btn w-100">Jharsuguda</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Kalahandi')" class="district-btn w-100">Kalahandi</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Kandhamal')" class="district-btn w-100">Kandhamal</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Kendrapara')" class="district-btn w-100">Kendrapara</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Kendujhar')" class="district-btn w-100">Kendujhar</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Khordha')" class="district-btn w-100">Khordha</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Koraput')" class="district-btn w-100">Koraput</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Malkangiri')" class="district-btn w-100">Malkangiri</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Mayurbhanj')" class="district-btn w-100">Mayurbhanj</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Nabarangpur')" class="district-btn w-100">Nabarangpur</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Nayagarh')" class="district-btn w-100">Nayagarh</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Nuapada')" class="district-btn w-100">Nuapada</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Puri')" class="district-btn w-100">Puri</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Rayagada')" class="district-btn w-100">Rayagada</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Sambalpur')" class="district-btn w-100">Sambalpur</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Subarnapur')" class="district-btn w-100">Subarnapur</button></div>
+          <div class="col"><button onclick="selectDistrictOn3DMap('Sundargarh')" class="district-btn w-100">Sundargarh</button></div>
         </div>
       </div>
     </div>
@@ -220,6 +223,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="/js/app.js"></script>
   <script src="/js/auth.js"></script>
-  <script src="/js/map.js"></script>
+  <script src="/js/map3d.js"></script>
 </body>
 </html>
