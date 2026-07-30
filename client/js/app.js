@@ -41,7 +41,7 @@ const i18nDict = {
     heroHeading: "ଓଡ଼ିଶାର ପ୍ରତ୍ୟେକ ଚାଷୀଙ୍କ ପାଇଁ ଉନ୍ନତ କୃଷି ସେବା",
     heroSubheading: "୩୦ଟି ଜିଲ୍ଲାର ଫସଲ ସୂଚୀ, ପାଣିପାଗ ସୂଚନା, ଖତ ସାର ପରିମାଣ, ରୋଗ ପୋକ ନିୟନ୍ତ୍ରଣ ଓ AI କୃଷି ପରାମର୍ଶ।",
     selectDistrict: "ଜିଲ୍ଲା ବାଛନ୍ତୁ",
-    selectSeason: "ఋతు ବାଛନ୍ତୁ",
+    selectSeason: "ఋতু ବାଛନ୍ତୁ",
     selectCrop: "ଫସଲ ବାଛନ୍ତୁ",
     viewSchedule: "ସୂଚୀ ଦେଖନ୍ତୁ",
     downloadPDF: "PDF ଡାଉନଲୋଡ୍"
@@ -140,10 +140,12 @@ function speakText(text) {
   }
 }
 
-// Register PWA Service Worker
+// Clear old Service Worker cache to force fresh content load
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW registration failed:', err));
+  navigator.serviceWorker.getRegistrations().then(registrations => {
+    for (let registration of registrations) {
+      registration.unregister();
+    }
   });
 }
 
