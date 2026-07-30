@@ -21,9 +21,24 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static frontend and uploads
-app.use(express.static(path.join(__dirname, '../client')));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// Force zero browser cache on all static HTML/JS/CSS files
+app.use((req, res, next) => {
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+  res.setHeader('Surrogate-Control', 'no-store');
+  next();
+});
+
+// Serve static frontend and uploads with zero caching
+app.use(express.static(path.join(__dirname, '../client'), {
+  etag: false,
+  maxAge: 0
+}));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
+  etag: false,
+  maxAge: 0
+}));
 
 // REST API Routes
 app.use('/api/auth', authRoutes);
