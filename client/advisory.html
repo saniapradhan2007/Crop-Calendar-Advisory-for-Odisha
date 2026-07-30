@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Advisory & Diagnostics - Odisha Crop Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+    <div class="container-fluid max-width-container">
+      <a class="navbar-brand" href="/index.html"><i class="fas fa-wheat-awn"></i><span data-i18n="appTitle">Odisha Crop Calendar</span></a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+          <li class="nav-item"><a class="nav-link" href="/index.html" data-i18n="home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/crop-calendar.html" data-i18n="cropCalendar">Crop Calendar</a></li>
+          <li class="nav-item"><a class="nav-link active" href="/advisory.html" data-i18n="advisory">Smart Advisory</a></li>
+          <li class="nav-item"><a class="nav-link" href="/weather.html" data-i18n="weather">Weather</a></li>
+          <li class="nav-item"><a class="nav-link" href="/market.html" data-i18n="marketPrices">Market Prices</a></li>
+          <li class="nav-item"><a class="nav-link" href="/chatbot.html" data-i18n="aiAssistant">AI Assistant</a></li>
+          <li class="nav-item"><a class="nav-link" href="/dashboard.html" data-i18n="dashboard">Dashboard</a></li>
+          <li class="nav-item" id="adminNavItem" style="display:none;"><a class="nav-link text-warning fw-bold" href="/admin.html" data-i18n="admin">Officer Panel</a></li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2">
+          <button id="langToggleBtn" onclick="toggleLanguage()" class="btn btn-outline-secondary btn-sm rounded-pill px-3 fw-bold">ଓଡ଼ିଆ</button>
+          <button id="themeToggleBtn" onclick="toggleTheme()" class="btn btn-outline-secondary btn-sm rounded-circle" style="width:36px; height:36px;"><i class="fas fa-moon"></i></button>
+          <ul class="navbar-nav d-flex flex-row align-items-center" id="authNavItems"></ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container py-4">
+
+    <!-- Smart Fertilizer Calculator Widget -->
+    <div class="glass-card p-4 mb-5">
+      <div class="row align-items-center">
+        <div class="col-md-5 mb-3 mb-md-0">
+          <h4 class="fw-bold text-success"><i class="fas fa-calculator me-2"></i>Fertilizer Dose Calculator</h4>
+          <p class="text-muted small mb-3">Calculate exact Urea, DAP, SSP & MOP dosage per acre for optimal crop yields</p>
+          
+          <div class="mb-2">
+            <label class="form-label font-weight-bold">Select Crop</label>
+            <select id="fertCropSelect" class="form-select">
+              <option value="Paddy">Paddy (Rice)</option>
+              <option value="Maize">Maize (Corn)</option>
+              <option value="Groundnut">Groundnut</option>
+              <option value="Mustard">Mustard / Oilseeds</option>
+            </select>
+          </div>
+
+          <div class="row g-2 mb-3">
+            <div class="col-6">
+              <label class="form-label font-weight-bold">Land (Acres)</label>
+              <input type="number" id="fertAcresInput" class="form-control" value="1" min="0.5" step="0.5">
+            </div>
+            <div class="col-6">
+              <label class="form-label font-weight-bold">Growth Stage</label>
+              <select id="fertStageSelect" class="form-select">
+                <option value="Basal">Basal Sowing</option>
+                <option value="Tillering">Tillering / Knee-high</option>
+                <option value="Panicle">Panicle / Flowering</option>
+              </select>
+            </div>
+          </div>
+
+          <button id="calcFertBtn" class="btn btn-primary-custom w-100">
+            <i class="fas fa-calculator me-2"></i>Calculate N-P-K Doses
+          </button>
+        </div>
+
+        <div class="col-md-7">
+          <div id="fertResultBox">
+            <div class="p-4 bg-light rounded text-center text-muted">
+              <i class="fas fa-flask fa-2x mb-2 text-primary"></i>
+              <p class="mb-0">Select your crop parameters and click "Calculate N-P-K Doses" to view recommendation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active Bulletins Feed -->
+    <h3 class="fw-bold text-dark mb-3"><i class="fas fa-bullhorn text-danger me-2"></i>Live Officer Bulletins & Alerts</h3>
+    <div id="advisoriesFeedContainer" class="mb-5"></div>
+
+    <!-- Pest & Disease Diagnostic Cards Grid -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h3 class="fw-bold text-dark mb-0"><i class="fas fa-bug text-warning me-2"></i>Pest & Disease Diagnostic Cards</h3>
+      <span class="badge bg-danger">7 Common Odisha Pests</span>
+    </div>
+    <div class="row g-3" id="pestDiagnosticGrid"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/advisory.js"></script>
+</body>
+</html>
