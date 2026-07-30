@@ -68,44 +68,62 @@
     </div>
   </section>
 
-  <!-- Odisha 30 Districts Quick Grid -->
+  <!-- Interactive Odisha Map & District Selector -->
   <section class="py-5">
     <div class="container">
       <div class="text-center mb-4">
-        <h3 class="fw-bold text-dark"><i class="fas fa-map-marked-alt text-success me-2"></i>Select District (All 30 Districts of Odisha)</h3>
-        <p class="text-muted">Click any district to view customized crop schedules & live weather</p>
+        <h3 class="fw-bold text-dark"><i class="fas fa-map-marked-alt text-success me-2"></i>Interactive Odisha District Map & Crop Insights</h3>
+        <p class="text-muted">Click any district on the interactive map or grid below to view recommended crops, live weather & crop calendar</p>
       </div>
 
+      <!-- Interactive Map & Smart Insights Card Grid -->
+      <div class="row g-4 mb-4 align-items-stretch">
+        <div class="col-lg-7">
+          <div class="glass-card p-3 text-center h-100 d-flex flex-column align-items-center justify-content-center">
+            <small class="text-muted mb-2 fw-bold"><i class="fas fa-hand-pointer text-warning me-1"></i>Click any district node on the Odisha map:</small>
+            <svg id="odishaInteractiveSvgMap" viewBox="0 0 520 460" style="max-width: 100%; height: auto; border-radius: 16px;"></svg>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div id="mapDistrictDetailsCard" class="h-100"></div>
+        </div>
+      </div>
+
+      <!-- Quick 30 District Buttons Grid -->
       <div class="glass-card p-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="fw-bold text-dark mb-0"><i class="fas fa-th me-2 text-primary"></i>All 30 Districts of Odisha Quick Select</h5>
+          <small class="text-muted">Click district to activate map & view insights</small>
+        </div>
         <div class="row row-cols-2 row-cols-sm-3 row-cols-md-5 row-cols-lg-6 g-2 text-center" id="odishaDistrictGrid">
-          <!-- 30 Districts -->
-          <div class="col"><a href="/crop-calendar.html?district=Angul" class="district-btn d-block text-decoration-none">Angul</a></div>
-          <div class="col"><a href="/crop-calendar.html?district=Balasore" class="district-btn d-block text-decoration-none">Balasore</a></div>
-          <div class="col"><a href="/crop-calendar.html?district=Bargarh" class="district-btn d-block text-decoration-none">Bargarh</a></div>
-          <div class="col"><a href="/crop-calendar.html?district=Bhadrak" class="district-btn d-block text-decoration-none">Bhadrak</a></div>
-          <div class="col"><a href="/crop-calendar.html?district=Bolangir" class="district-btn d-block text-decoration-none">Bolangir</a></div>
-          <div class="col"><a href="/crop-calendar.html?district=Cuttack" class="district-btn d-block text-decoration-none active">Cuttack</a></div>
-          <div class="col"><a href="/crop-calendar.html?district=Dhenkanal" class="district-btn d-block text-decoration-none">Dhenkanal</a></div>
-          <div class="col"><a href="/crop-calendar.html?district=Ganjam" class="district-btn d-block text-decoration-none">Ganjam</a></div>
-          <div class="col"><a href="/crop-calendar.html?district=Jagatsinghpur" class="district-btn d-block text-decoration-none">Jagatsinghpur</a></div>
-          <div class="col"><a href="/crop-calendar.html?district=Jajpur" class="district-btn d-block text-decoration-none">Jajpur</a></div>
-          <div class="col"><a href="/crop-calendar.html?district=Jharsuguda" class="district-btn d-block text-decoration-none">Jharsuguda</a></div>
-          <div class="col"><a href="/crop-calendar.html?district=Kalahandi" class="district-btn d-block text-decoration-none">Kalahandi</a></div>
-          <div class="col"><a href="/crop-calendar.html?district=Kandhamal" class="district-btn d-block text-decoration-none">Kandhamal</a></div>
-          <div class="col"><a href="/crop-calendar.html?district=Kendrapara" class="district-btn d-block text-decoration-none">Kendrapara</a></div>
-          <div class="col"><a href="/crop-calendar.html?district=Kendujhar" class="district-btn d-block text-decoration-none">Kendujhar</a></div>
-          <div class="col"><a href="/crop-calendar.html?district=Khordha" class="district-btn d-block text-decoration-none">Khordha</a></div>
-          <div class="col"><a href="/crop-calendar.html?district=Koraput" class="district-btn d-block text-decoration-none">Koraput</a></div>
-          <div class="col"><a href="/crop-calendar.html?district=Malkangiri" class="district-btn d-block text-decoration-none">Malkangiri</a></div>
-          <div class="col"><a href="/crop-calendar.html?district=Mayurbhanj" class="district-btn d-block text-decoration-none">Mayurbhanj</a></div>
-          <div class="col"><a href="/crop-calendar.html?district=Nabarangpur" class="district-btn d-block text-decoration-none">Nabarangpur</a></div>
-          <div class="col"><a href="/crop-calendar.html?district=Nayagarh" class="district-btn d-block text-decoration-none">Nayagarh</a></div>
-          <div class="col"><a href="/crop-calendar.html?district=Nuapada" class="district-btn d-block text-decoration-none">Nuapada</a></div>
-          <div class="col"><a href="/crop-calendar.html?district=Puri" class="district-btn d-block text-decoration-none">Puri</a></div>
-          <div class="col"><a href="/crop-calendar.html?district=Rayagada" class="district-btn d-block text-decoration-none">Rayagada</a></div>
-          <div class="col"><a href="/crop-calendar.html?district=Sambalpur" class="district-btn d-block text-decoration-none">Sambalpur</a></div>
-          <div class="col"><a href="/crop-calendar.html?district=Subarnapur" class="district-btn d-block text-decoration-none">Subarnapur</a></div>
-          <div class="col"><a href="/crop-calendar.html?district=Sundargarh" class="district-btn d-block text-decoration-none">Sundargarh</a></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Angul')" class="district-btn w-100">Angul</button></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Balasore')" class="district-btn w-100">Balasore</button></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Bargarh')" class="district-btn w-100">Bargarh</button></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Bhadrak')" class="district-btn w-100">Bhadrak</button></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Bolangir')" class="district-btn w-100">Bolangir</button></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Cuttack')" class="district-btn w-100 active">Cuttack</button></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Dhenkanal')" class="district-btn w-100">Dhenkanal</button></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Ganjam')" class="district-btn w-100">Ganjam</button></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Jagatsinghpur')" class="district-btn w-100">Jagatsinghpur</button></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Jajpur')" class="district-btn w-100">Jajpur</button></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Jharsuguda')" class="district-btn w-100">Jharsuguda</button></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Kalahandi')" class="district-btn w-100">Kalahandi</button></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Kandhamal')" class="district-btn w-100">Kandhamal</button></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Kendrapara')" class="district-btn w-100">Kendrapara</button></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Kendujhar')" class="district-btn w-100">Kendujhar</button></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Khordha')" class="district-btn w-100">Khordha</button></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Koraput')" class="district-btn w-100">Koraput</button></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Malkangiri')" class="district-btn w-100">Malkangiri</button></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Mayurbhanj')" class="district-btn w-100">Mayurbhanj</button></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Nabarangpur')" class="district-btn w-100">Nabarangpur</button></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Nayagarh')" class="district-btn w-100">Nayagarh</button></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Nuapada')" class="district-btn w-100">Nuapada</button></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Puri')" class="district-btn w-100">Puri</button></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Rayagada')" class="district-btn w-100">Rayagada</button></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Sambalpur')" class="district-btn w-100">Sambalpur</button></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Subarnapur')" class="district-btn w-100">Subarnapur</button></div>
+          <div class="col"><button onclick="selectDistrictOnMap('Sundargarh')" class="district-btn w-100">Sundargarh</button></div>
         </div>
       </div>
     </div>
@@ -188,5 +206,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="/js/app.js"></script>
   <script src="/js/auth.js"></script>
+  <script src="/js/map.js"></script>
 </body>
 </html>
