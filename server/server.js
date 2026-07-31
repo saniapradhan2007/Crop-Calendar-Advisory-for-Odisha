@@ -48,6 +48,10 @@ app.use('/api/weather', weatherRoutes);
 app.use('/api/market', marketRoutes);
 app.use('/api/chatbot', chatbotRoutes);
 
+app.get('/marketplace', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/marketplace.html'));
+});
+
 // Fallback to client SPA/index for non-API GET requests
 app.get('*', (req, res, next) => {
   if (req.path.startsWith('/api')) {

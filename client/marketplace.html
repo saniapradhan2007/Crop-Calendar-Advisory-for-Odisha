@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odisha Farmer Marketplace - Direct Crop Sales & Buying</title>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="stylesheet" href="/css/marketplace.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+    <div class="container-fluid max-width-container">
+      <a class="navbar-brand" href="/index.html">
+        <i class="fas fa-wheat-awn"></i>
+        <span data-i18n="appTitle">Odisha Crop Calendar</span>
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+          <li class="nav-item"><a class="nav-link" href="/index.html" data-i18n="home">Home</a></li>
+          <li class="nav-item"><a class="nav-link text-danger fw-bold" href="/live-map.html"><i class="fas fa-location-crosshairs me-1"></i>Live Map</a></li>
+          <li class="nav-item"><a class="nav-link" href="/crop-calendar.html" data-i18n="cropCalendar">Crop Calendar</a></li>
+          <li class="nav-item"><a class="nav-link" href="/advisory.html" data-i18n="advisory">Smart Advisory</a></li>
+          <li class="nav-item"><a class="nav-link" href="/weather.html" data-i18n="weather">Weather</a></li>
+          <li class="nav-item"><a class="nav-link" href="/market.html" data-i18n="marketPrices">Mandi Rates</a></li>
+          <li class="nav-item"><a class="nav-link active fw-bold text-success" href="/marketplace.html" data-i18n="marketplace"><i class="fas fa-store me-1"></i>Farmer Market</a></li>
+          <li class="nav-item"><a class="nav-link" href="/chatbot.html" data-i18n="aiAssistant">AI Assistant</a></li>
+          <li class="nav-item"><a class="nav-link" href="/dashboard.html" data-i18n="dashboard">Dashboard</a></li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2">
+          <button id="langToggleBtn" onclick="toggleLanguage()" class="btn btn-outline-secondary btn-sm rounded-pill px-3 fw-bold">ଓଡ଼ିଆ</button>
+          <button id="themeToggleBtn" onclick="toggleTheme()" class="btn btn-outline-secondary btn-sm rounded-circle" style="width:36px; height:36px;"><i class="fas fa-moon"></i></button>
+          <ul class="navbar-nav d-flex flex-row align-items-center" id="authNavItems"></ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <div class="container py-4">
+    
+    <!-- Hero Banner -->
+    <div class="market-hero">
+      <div class="market-hero-badge">
+        <i class="fas fa-certificate"></i> Direct Farm-to-Buyer Marketplace of Odisha
+      </div>
+      <h1 data-i18n="marketHeroTitle">Empowering Odisha Farmers & Buyers</h1>
+      <p data-i18n="marketHeroSubtitle">Sell harvested crops directly without middlemen or buy fresh organic produce from all 30 districts of Odisha at fair mandi prices.</p>
+      
+      <div class="d-flex flex-wrap gap-4 mt-4 text-white">
+        <div>
+          <h4 class="fw-bold mb-0 text-warning">30 Districts</h4>
+          <small class="text-white-50">Odisha Coverage</small>
+        </div>
+        <div class="border-end border-white-50 opacity-50"></div>
+        <div>
+          <h4 class="fw-bold mb-0 text-warning">0% Commission</h4>
+          <small class="text-white-50">Direct Farmer Profit</small>
+        </div>
+        <div class="border-end border-white-50 opacity-50"></div>
+        <div>
+          <h4 class="fw-bold mb-0 text-warning">100% Fresh</h4>
+          <small class="text-white-50">Verified Odisha Crops</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- User Role Status Bar -->
+    <div id="userStatusBarContainer" class="user-status-bar"></div>
+
+    <!-- Navigation Tabs -->
+    <ul class="nav nav-tabs market-nav-tabs mb-4 border-bottom">
+      <li class="nav-item">
+        <a class="nav-link nav-link-tab active" id="tabLinkCatalog" href="javascript:void(0)" onclick="switchTab('catalog')">
+          <i class="fas fa-store me-2"></i>Crop Catalog
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link nav-link-tab" id="tabLinkWishlist" href="javascript:void(0)" onclick="switchTab('wishlist')">
+          <i class="fas fa-heart text-danger me-2"></i>My Wishlist <span class="badge bg-danger rounded-pill" id="wishlistBadge">0</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link nav-link-tab" id="tabLinkFarmer" href="javascript:void(0)" onclick="switchTab('farmer-dashboard')">
+          <i class="fas fa-tractor text-success me-2"></i>Farmer Seller Dashboard
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link nav-link-tab" id="tabLinkOrders" href="javascript:void(0)" onclick="switchTab('buyer-orders')">
+          <i class="fas fa-box-open text-primary me-2"></i>Buyer Orders
+        </a>
+      </li>
+    </ul>
+
+    <!-- TAB 1: CATALOG CONTENT -->
+    <div id="tabCatalog" class="market-tab-content">
+      
+      <!-- Search & Filters Card -->
+      <div class="filter-card mb-4">
+        <div class="row g-3 align-items-center">
+          <div class="col-lg-4 col-md-6">
+            <label class="form-label fw-bold text-muted small"><i class="fas fa-search me-1"></i>Search Crops or Farmers</label>
+            <input type="text" id="cropSearchInput" class="form-control" placeholder="Search Paddy, Turmeric, Tomatoes, Farmer name...">
+          </div>
+          
+          <div class="col-lg-3 col-md-6">
+            <label class="form-label fw-bold text-muted small"><i class="fas fa-filter me-1"></i>Crop Category</label>
+            <select id="cropCategorySelect" class="form-select">
+              <option value="All" selected>All Categories</option>
+              <option value="Grains & Pulses">Grains & Pulses</option>
+              <option value="Vegetables">Vegetables</option>
+              <option value="Spices">Spices</option>
+              <option value="Oilseeds">Oilseeds</option>
+              <option value="Fruits">Fruits</option>
+            </select>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <label class="form-label fw-bold text-muted small"><i class="fas fa-map-marker-alt me-1"></i>Odisha District</label>
+            <select id="cropDistrictSelect" class="form-select">
+              <option value="All" selected>All 30 Districts</option>
+            </select>
+          </div>
+
+          <div class="col-lg-2 col-md-6">
+            <label class="form-label fw-bold text-muted small"><i class="fas fa-sort me-1"></i>Sort By</label>
+            <select id="cropSortSelect" class="form-select">
+              <option value="newest" selected>Newest Harvest</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="quantity-high">Highest Stock</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row g-3 align-items-center mt-2 border-top pt-3">
+          <div class="col-md-8">
+            <label class="form-label fw-bold text-muted small">
+              <i class="fas fa-tag me-1 text-success"></i>Max Price Filter: <span id="priceRangeVal" class="text-success fw-bold">₹200</span> / kg
+            </label>
+            <input type="range" class="form-range" id="priceRangeInput" min="10" max="300" step="5" value="200">
+          </div>
+          <div class="col-md-4 text-end">
+            <button class="btn btn-outline-secondary btn-sm rounded-pill px-3" onclick="resetFilters()">
+              <i class="fas fa-undo me-1"></i>Reset Filters
+            </button>
+          </div>
+        </div>
+
+        <!-- District Chips Filter Bar -->
+        <div class="district-chips-wrapper mt-3" id="districtChipsContainer"></div>
+      </div>
+
+      <!-- Crop Cards Grid -->
+      <div class="row" id="cropCatalogGrid"></div>
+    </div>
+
+    <!-- TAB 2: WISHLIST CONTENT -->
+    <div id="tabWishlist" class="market-tab-content" style="display:none;">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="fw-bold mb-0"><i class="fas fa-heart text-danger me-2"></i>My Saved Produce Wishlist</h4>
+        <p class="text-muted mb-0">Saved crops for fast checkout and price tracking</p>
+      </div>
+      <div class="row" id="wishlistCatalogGrid"></div>
+    </div>
+
+    <!-- TAB 3: FARMER SELLER DASHBOARD -->
+    <div id="tabFarmerDashboard" class="market-tab-content" style="display:none;">
+      
+      <!-- Stats Cards -->
+      <div class="row g-3 mb-4">
+        <div class="col-md-4">
+          <div class="glass-card p-3 border-start border-4 border-success">
+            <small class="text-muted fw-bold">TOTAL CROPS LISTED</small>
+            <h3 class="fw-bold text-success mb-0" id="farmerStatTotal">0</h3>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="glass-card p-3 border-start border-4 border-primary">
+            <small class="text-muted fw-bold">ACTIVE IN STOCK</small>
+            <h3 class="fw-bold text-primary mb-0" id="farmerStatActive">0</h3>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="glass-card p-3 border-start border-4 border-warning">
+            <small class="text-muted fw-bold">BUYER ORDERS RECEIVED</small>
+            <h3 class="fw-bold text-warning mb-0" id="farmerStatOrders">0</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="fw-bold mb-0"><i class="fas fa-boxes-stacked me-2 text-success"></i>Manage My Produce Listings</h5>
+        <button class="btn btn-success rounded-pill px-4 fw-bold" onclick="openAddCropModal()">
+          <i class="fas fa-plus-circle me-1"></i>Post New Crop Listing
+        </button>
+      </div>
+
+      <div id="farmerProductsContainer"></div>
+    </div>
+
+    <!-- TAB 4: BUYER ORDERS -->
+    <div id="tabBuyerOrders" class="market-tab-content" style="display:none;">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="fw-bold mb-0"><i class="fas fa-shopping-bag me-2 text-primary"></i>My Purchase Orders & Receipts</h4>
+        <p class="text-muted mb-0">Track delivery status & direct contact details of farmers</p>
+      </div>
+      <div id="buyerOrdersContainer"></div>
+    </div>
+
+  </div> <!-- End Main Container -->
+
+  <!-- ==================== MODALS ==================== -->
+
+  <!-- 1. Post/Edit Crop Modal -->
+  <div class="modal fade" id="farmerCropModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+          <h5 class="modal-title fw-bold" id="farmerCropModalTitle">🌾 Post New Farm Produce</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <form id="farmerCropForm" onsubmit="handleSaveFarmerCrop(event)">
+          <div class="modal-body">
+            <input type="hidden" id="farmerCropId">
+            <input type="hidden" id="farmerCropImgUrl">
+
+            <div class="row g-3">
+              <div class="col-md-8">
+                <label class="form-label fw-bold">Crop Produce Name *</label>
+                <input type="text" class="form-control" id="farmerCropName" placeholder="e.g., Sambalpur Swarna Paddy / Kandhamal Haldi" required>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label fw-bold">Category *</label>
+                <select class="form-select" id="farmerCropCategory" required>
+                  <option value="Grains & Pulses">Grains & Pulses</option>
+                  <option value="Vegetables">Vegetables</option>
+                  <option value="Spices">Spices</option>
+                  <option value="Oilseeds">Oilseeds</option>
+                  <option value="Fruits">Fruits</option>
+                </select>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label fw-bold">Quantity (in Kg) *</label>
+                <input type="number" class="form-control" id="farmerCropQuantity" placeholder="e.g. 500" min="1" required>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label fw-bold">Price per Kg (₹) *</label>
+                <input type="number" class="form-control" id="farmerCropPrice" placeholder="e.g. 25" min="1" required>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label fw-bold">Harvest Date *</label>
+                <input type="date" class="form-control" id="farmerCropHarvestDate" required>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-bold">Odisha District *</label>
+                <select class="form-select" id="farmerCropDistrict" required>
+                  <!-- Populated dynamically -->
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-bold">Village / Mandi Location *</label>
+                <input type="text" class="form-control" id="farmerCropLocation" placeholder="e.g., Attabira Block, Bargarh" required>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-bold">Farmer Contact Mobile Number *</label>
+                <input type="tel" class="form-control" id="farmerCropPhone" placeholder="+91 9876543210" required>
+              </div>
+
+              <div class="col-md-6 d-flex align-items-center">
+                <div class="form-check form-switch mt-4">
+                  <input class="form-check-input" type="checkbox" id="farmerCropOrganic">
+                  <label class="form-check-label fw-bold text-success" for="farmerCropOrganic">🌿 Certified Organic Farm Produce</label>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label fw-bold">Select Produce Photo Preset</label>
+                <div class="preset-img-grid" id="imagePresetGrid"></div>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label fw-bold">Crop Description & Quality Details</label>
+                <textarea class="form-control" id="farmerCropDesc" rows="3" placeholder="Describe quality grade, moisture level, irrigation source, etc."></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-success rounded-pill px-4 fw-bold"><i class="fas fa-save me-1"></i>Publish Produce Listing</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Contact Farmer Modal -->
+  <div class="modal fade" id="contactFarmerModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title fw-bold"><i class="fas fa-headset text-success me-2"></i>Contact Farmer Directly</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="contactFarmerModalBody"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Checkout Buy Now Modal -->
+  <div class="modal fade" id="checkoutModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+          <h5 class="modal-title fw-bold"><i class="fas fa-shopping-cart me-2"></i>Order Farm Produce</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <form onsubmit="handleConfirmOrder(event)">
+          <div class="modal-body">
+            <div class="glass-card p-3 mb-3">
+              <h6 class="fw-bold mb-1" id="checkoutCropTitle">Crop Title</h6>
+              <p class="text-muted small mb-1" id="checkoutFarmerName">Farmer Name</p>
+              <div class="d-flex justify-content-between align-items-center mt-2 border-top pt-2">
+                <span>Price per Kg: <strong id="checkoutPricePerKg" class="text-success">₹0</strong></span>
+                <span>In Stock: <strong id="checkoutMaxQty">0</strong> kg</span>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12">
+                <label class="form-label fw-bold">Quantity Needed (in Kg) *</label>
+                <input type="number" class="form-control" id="checkoutQtyInput" min="1" required oninput="updateCheckoutTotal()">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-bold">Buyer Full Name *</label>
+                <input type="text" class="form-control" id="checkoutBuyerName" placeholder="Your Name" required>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-bold">Phone Number *</label>
+                <input type="tel" class="form-control" id="checkoutBuyerPhone" placeholder="+91 9876543210" required>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-bold">Delivery District *</label>
+                <select class="form-select" id="checkoutBuyerDistrict" required>
+                  <option value="Cuttack">Cuttack</option>
+                  <option value="Bhubaneswar">Bhubaneswar / Khordha</option>
+                  <option value="Bargarh">Bargarh</option>
+                  <option value="Sambalpur">Sambalpur</option>
+                  <option value="Ganjam">Ganjam</option>
+                  <option value="Balasore">Balasore</option>
+                  <option value="Puri">Puri</option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-bold">Payment Method *</label>
+                <select class="form-select" id="checkoutPaymentMethod">
+                  <option value="Cash on Delivery (COD)">Cash on Delivery (COD)</option>
+                  <option value="UPI / Krushi Pay">UPI / Krushi Pay (Simulated)</option>
+                </select>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label fw-bold">Full Delivery Address *</label>
+                <textarea class="form-control" id="checkoutBuyerAddress" rows="2" placeholder="House No, Village/Street, Mandi spot..." required></textarea>
+              </div>
+            </div>
+
+            <div class="alert alert-success d-flex justify-content-between align-items-center mt-3 mb-0">
+              <span class="fw-bold fs-6">Total Amount:</span>
+              <span class="fw-bold fs-4 text-success" id="checkoutTotalAmount">₹0</span>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-success rounded-pill px-4 fw-bold"><i class="fas fa-check-circle me-1"></i>Confirm Order</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Order Confirmation Receipt Modal -->
+  <div class="modal fade" id="orderReceiptModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body p-4" id="orderReceiptModalBody"></div>
+        <div class="modal-footer border-0 justify-content-center">
+          <button type="button" class="btn btn-success rounded-pill px-4" data-bs-dismiss="modal" onclick="switchTab('buyer-orders')">
+            <i class="fas fa-boxes-stacked me-1"></i>View All My Orders
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. User Auth (Farmer / Buyer Sign In) Modal -->
+  <div class="modal fade" id="authModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+          <h5 class="modal-title fw-bold"><i class="fas fa-user-shield me-2"></i>Marketplace Account</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <form onsubmit="handleAuthSubmit(event)">
+          <div class="modal-body">
+            <div class="row g-3">
+              <div class="col-12">
+                <label class="form-label fw-bold">Account Role *</label>
+                <select class="form-select" id="modalRegRole">
+                  <option value="Farmer">👨‍🌾 Odisha Farmer (Seller)</option>
+                  <option value="Buyer">🛒 Crop Buyer / Trader</option>
+                </select>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label fw-bold">Full Name *</label>
+                <input type="text" class="form-control" id="modalRegName" placeholder="e.g. Ramesh Chandra Sahoo" required>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label fw-bold">Mobile Phone Number *</label>
+                <input type="tel" class="form-control" id="modalRegPhone" placeholder="+91 9876543210" required>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label fw-bold">Odisha District *</label>
+                <select class="form-select" id="modalRegDistrict" required>
+                  <!-- Populated dynamically -->
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success rounded-pill w-100 fw-bold py-2"><i class="fas fa-sign-in-alt me-2"></i>Continue to Marketplace</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer mt-5 py-4 bg-dark text-white text-center">
+    <div class="container">
+      <p class="mb-1" data-i18n="footerText">© 2026 Odisha Department of Agriculture & Farmers' Empowerment. All rights reserved.</p>
+      <small class="text-white-50">Odisha Direct Farmer-to-Buyer Marketplace Portal</small>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/marketplace.js"></script>
+</body>
+</html>
